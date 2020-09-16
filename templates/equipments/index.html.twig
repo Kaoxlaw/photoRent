@@ -29,7 +29,7 @@
                 <td>{{ equipment.numberId }}</td>
                 <td>{{ equipment.date ? equipment.date|date('Y-m-d') : '' }}</td>
                 <td>{{ equipment.price }}</td>
-                <td>{{ equipment.pictures }}</td>
+                <td><img src="{{ asset('uploads/equipments/') }}{{ equipment.pictures }}" width="250" height="150" </td>
                 <td>
                     <a href="{{ path('equipments_show', {'id': equipment.id}) }}">show</a>
                     <a href="{{ path('equipments_edit', {'id': equipment.id}) }}">edit</a>

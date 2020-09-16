@@ -6,6 +6,8 @@ use App\Entity\Equipments;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
+
 
 class EquipmentsType extends AbstractType
 {
@@ -16,10 +18,8 @@ class EquipmentsType extends AbstractType
             ->add('type')
             ->add('model')
             ->add('numberId')
-            ->add('date')
             ->add('price')
-            ->add('pictures')
-        ;
+            ->add('imageFile', VichImageType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

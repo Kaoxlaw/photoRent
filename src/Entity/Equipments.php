@@ -4,8 +4,12 @@ namespace App\Entity;
 
 use App\Repository\EquipmentsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
+ * @ORM\Entity
+ * @Vich\Uploadable
  * @ORM\Entity(repositoryClass=EquipmentsRepository::class)
  */
 class Equipments
@@ -51,6 +55,17 @@ class Equipments
      * @ORM\Column(type="text")
      */
     private $pictures;
+
+    /**
+     * @Vich\UploadableField(mapping="equipments_images", fileNameProperty="pictures")
+     * @var File
+     */
+    private $imageFile;
+
+    public function __construct()
+    {
+        $this->date = new \DateTime();
+    }
 
     public function getId(): ?int
     {
@@ -139,5 +154,15 @@ class Equipments
         $this->pictures = $pictures;
 
         return $this;
+    }
+
+    public function setImageFile(File $image = null)
+    {
+        $this->imageFile = $image;
+    }
+
+    public function getImageFile()
+    {
+        return $this->imageFile;
     }
 }

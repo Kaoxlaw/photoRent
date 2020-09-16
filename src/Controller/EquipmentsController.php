@@ -30,6 +30,10 @@ class EquipmentsController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        if (!$this->getUser()) {
+            $this->addFlash("danger", "You have to be LogIN! Please Do!");
+            return $this->redirectToRoute('app_login');
+        }
         $equipment = new Equipments();
         $form = $this->createForm(EquipmentsType::class, $equipment);
         $form->handleRequest($request);
@@ -38,6 +42,9 @@ class EquipmentsController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($equipment);
             $entityManager->flush();
+
+            $this->addFlash("success", "Your Post is added!");
+
 
             return $this->redirectToRoute('equipments_index');
         }
@@ -83,7 +90,7 @@ class EquipmentsController extends AbstractController
      */
     public function delete(Request $request, Equipments $equipment): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$equipment->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $equipment->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($equipment);
             $entityManager->flush();
