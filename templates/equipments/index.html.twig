@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Equipments index{% endblock %}
+
+{% block body %}
+    <h1>Equipments index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Brand</th>
+                <th>Type</th>
+                <th>Model</th>
+                <th>NumberId</th>
+                <th>Date</th>
+                <th>Price</th>
+                <th>Pictures</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for equipment in equipments %}
+            <tr>
+                <td>{{ equipment.id }}</td>
+                <td>{{ equipment.brand }}</td>
+                <td>{{ equipment.type }}</td>
+                <td>{{ equipment.model }}</td>
+                <td>{{ equipment.numberId }}</td>
+                <td>{{ equipment.date ? equipment.date|date('Y-m-d') : '' }}</td>
+                <td>{{ equipment.price }}</td>
+                <td>{{ equipment.pictures }}</td>
+                <td>
+                    <a href="{{ path('equipments_show', {'id': equipment.id}) }}">show</a>
+                    <a href="{{ path('equipments_edit', {'id': equipment.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('equipments_new') }}">Create new</a>
+{% endblock %}
