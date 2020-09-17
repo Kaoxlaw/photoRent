@@ -11,7 +11,7 @@
     {% if(is_granted('IS_AUTHENTICATED_FULLY')) %}
     Hello {{ app.user }} and Welcome!
     {% else %}
-    <h2>To access to Rent or Sell Section, you must <a href="{{ path('app_register')}}">create</a> a account or <a href="{{ path('app_login')}}">loggIn</a>,</h2>
+    <h2>To access to Rent or Sell Section, you must <a href="{{ path('app_register')}}">create</a> a account or <a href="{{ path('app_login')}}">logIn</a>,</h2>
     <h2>Thanks You!</h2>
     {% endif %} 
     <hr>
