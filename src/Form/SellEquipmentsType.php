@@ -2,14 +2,13 @@
 
 namespace App\Form;
 
-use App\Entity\Equipments;
+use App\Entity\SellEquipments;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
-
-class EquipmentsType extends AbstractType
+class SellEquipmentsType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -17,15 +16,17 @@ class EquipmentsType extends AbstractType
             ->add('brand')
             ->add('type')
             ->add('model')
-            ->add('numberId')
+            ->add('number_id')
+            ->add('available')
             ->add('price')
-            ->add('imageFile', VichImageType::class, ['required' => false]);
+            ->add('imageFile', VichImageType::class, ['required' => false])
+            ->add('user');
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Equipments::class,
+            'data_class' => SellEquipments::class,
         ]);
     }
 }

@@ -3,45 +3,53 @@
 {% block title %}Equipments index{% endblock %}
 
 {% block body %}
-    <h1>Equipments index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Brand</th>
-                <th>Type</th>
-                <th>Model</th>
-                <th>NumberId</th>
-                <th>Date</th>
-                <th>Price</th>
-                <th>Pictures</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for equipment in equipments %}
-            <tr>
-                <td>{{ equipment.id }}</td>
-                <td>{{ equipment.brand }}</td>
-                <td>{{ equipment.type }}</td>
-                <td>{{ equipment.model }}</td>
-                <td>{{ equipment.numberId }}</td>
-                <td>{{ equipment.date ? equipment.date|date('Y-m-d') : '' }}</td>
-                <td>{{ equipment.price }}</td>
-                <td><img src="{{ asset('uploads/equipments/') }}{{ equipment.pictures }}" width="250" height="150" </td>
-                <td>
-                    <a href="{{ path('equipments_show', {'id': equipment.id}) }}">show</a>
-                    <a href="{{ path('equipments_edit', {'id': equipment.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="9">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class = "example-wrapper">
+        <h1>PhotoRent Shop</h1>
 
-    <a href="{{ path('equipments_new') }}">Create new</a>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr class="trtitle">
+                    <th>Id</th>
+                    <th>Brand</th>
+                    <th>Type</th>
+                    <th>Model</th>
+                    <th>NumberId</th>
+                    <th>Date</th>
+                    <th>Price</th>
+                    <th>Pictures</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for equipment in equipments %}
+                <tr>
+                    <td>{{ equipment.id }}</td>
+                    <td>{{ equipment.brand }}</td>
+                    <td>{{ equipment.type }}</td>
+                    <td>{{ equipment.model }}</td>
+                    <td>{{ equipment.numberId }}</td>
+                    <td>{{ equipment.date ? equipment.date|date('Y-m-d') : '' }}</td>
+                    <td>{{ equipment.price }} €</td>
+                    <td><img src="{{ asset('uploads/equipments/') }}{{ equipment.pictures }}" width="250" height="150" </td>
+                    <td>
+                        <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">
+                            <a href="{{ path('equipments_show', {'id': equipment.id}) }}">show</a>
+                        </button>
+                        <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">    
+                            <a href="{{ path('equipments_edit', {'id': equipment.id}) }}">edit</a>
+                        </button>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="9">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <button class="btn btn-outline-info my-2 my-sm-0" type="submit">
+            <a href="{{ path('equipments_new') }}">Create new</a>
+        </button>
+    </div>
 {% endblock %}

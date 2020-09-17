@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Repository\EquipmentsRepository;
+use App\Repository\RentEquipmentsRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -10,9 +10,9 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * @ORM\Entity
  * @Vich\Uploadable
- * @ORM\Entity(repositoryClass=EquipmentsRepository::class)
+ * @ORM\Entity(repositoryClass=RentEquipmentsRepository::class)
  */
-class Equipments
+class RentEquipments
 {
     /**
      * @ORM\Id
@@ -37,19 +37,14 @@ class Equipments
     private $model;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=50)
      */
-    private $numberId;
+    private $number_id;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="boolean")
      */
-    private $date;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $price;
+    private $availible;
 
     /**
      * @ORM\Column(type="text")
@@ -57,15 +52,15 @@ class Equipments
     private $pictures;
 
     /**
-     * @Vich\UploadableField(mapping="equipments_images", fileNameProperty="pictures")
+     * @Vich\UploadableField(mapping="rentEquipments_images", fileNameProperty="pictures")
      * @var File
      */
     private $imageFile;
 
-    public function __construct()
-    {
-        $this->date = new \DateTime();
-    }
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $price;
 
     public function getId(): ?int
     {
@@ -108,38 +103,26 @@ class Equipments
         return $this;
     }
 
-    public function getNumberId(): ?int
+    public function getNumberId(): ?string
     {
-        return $this->numberId;
+        return $this->number_id;
     }
 
-    public function setNumberId(int $numberId): self
+    public function setNumberId(string $number_id): self
     {
-        $this->numberId = $numberId;
+        $this->number_id = $number_id;
 
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getAvailible(): ?bool
     {
-        return $this->date;
+        return $this->availible;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setAvailible(bool $availible): self
     {
-        $this->date = $date;
-
-        return $this;
-    }
-
-    public function getPrice(): ?int
-    {
-        return $this->price;
-    }
-
-    public function setPrice(int $price): self
-    {
-        $this->price = $price;
+        $this->availible = $availible;
 
         return $this;
     }
@@ -164,5 +147,17 @@ class Equipments
     public function getImageFile()
     {
         return $this->imageFile;
+    }
+
+    public function getPrice(): ?string
+    {
+        return $this->price;
+    }
+
+    public function setPrice(string $price): self
+    {
+        $this->price = $price;
+
+        return $this;
     }
 }

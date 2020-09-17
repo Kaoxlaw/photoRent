@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RentEquipments index{% endblock %}
+
+{% block body %}
+    
+
+    <div class = "example-wrapper">
+    <h1>RentEquipments index</h1>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr class="trtitle">
+                <th>Id</th>
+                <th>Brand</th>
+                <th>Type</th>
+                <th>Model</th>
+                <th>Number_id</th>
+                <th>Available</th>
+                <th>Price</th>
+                <th>Pictures</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rent_equipment in rent_equipments %}
+            <tr>
+                <td>{{ rent_equipment.id }}</td>
+                <td>{{ rent_equipment.brand }}</td>
+                <td>{{ rent_equipment.type }}</td>
+                <td>{{ rent_equipment.model }}</td>
+                <td>{{ rent_equipment.numberId }}</td>
+                <td>{{ rent_equipment.availible ? 'Yes' : 'No' }}</td>
+                <td>{{ rent_equipment.price }} €</td>
+                <td><img src="{{ asset('uploads/rentEquipments/') }}{{ rent_equipment.pictures }}" width="250" height="150" </td>
+                <td>
+                    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">
+                        <a href="{{ path('rent_equipments_show', {'id': rent_equipment.id}) }}">show</a>
+                    </button>
+                    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">
+                        <a href="{{ path('rent_equipments_edit', {'id': rent_equipment.id}) }}">edit</a>
+                    </button>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <button class="btn btn-outline-info my-2 my-sm-0" type="submit">
+        <a href="{{ path('rent_equipments_new') }}">Create new</a>
+    </button>
+    </div>
+{% endblock %}

@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Repository\EquipmentsRepository;
+use App\Repository\SellEquipmentsRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -10,9 +10,9 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * @ORM\Entity
  * @Vich\Uploadable
- * @ORM\Entity(repositoryClass=EquipmentsRepository::class)
+ * @ORM\Entity(repositoryClass=SellEquipmentsRepository::class)
  */
-class Equipments
+class SellEquipments
 {
     /**
      * @ORM\Id
@@ -20,6 +20,11 @@ class Equipments
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="sellEquipments")
+     */
+    private $user;
 
     /**
      * @ORM\Column(type="string", length=50)
@@ -37,9 +42,14 @@ class Equipments
     private $model;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=50)
      */
-    private $numberId;
+    private $number_id;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $available;
 
     /**
      * @ORM\Column(type="date")
@@ -47,7 +57,7 @@ class Equipments
     private $date;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=50)
      */
     private $price;
 
@@ -57,7 +67,7 @@ class Equipments
     private $pictures;
 
     /**
-     * @Vich\UploadableField(mapping="equipments_images", fileNameProperty="pictures")
+     * @Vich\UploadableField(mapping="sellEquipments_images", fileNameProperty="pictures")
      * @var File
      */
     private $imageFile;
@@ -70,6 +80,18 @@ class Equipments
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getUser(): ?user
+    {
+        return $this->user;
+    }
+
+    public function setUser(?user $user): self
+    {
+        $this->user = $user;
+
+        return $this;
     }
 
     public function getBrand(): ?string
@@ -108,14 +130,26 @@ class Equipments
         return $this;
     }
 
-    public function getNumberId(): ?int
+    public function getNumberId(): ?string
     {
-        return $this->numberId;
+        return $this->number_id;
     }
 
-    public function setNumberId(int $numberId): self
+    public function setNumberId(string $number_id): self
     {
-        $this->numberId = $numberId;
+        $this->number_id = $number_id;
+
+        return $this;
+    }
+
+    public function getAvailable(): ?bool
+    {
+        return $this->available;
+    }
+
+    public function setAvailable(bool $available): self
+    {
+        $this->available = $available;
 
         return $this;
     }
@@ -132,12 +166,12 @@ class Equipments
         return $this;
     }
 
-    public function getPrice(): ?int
+    public function getPrice(): ?string
     {
         return $this->price;
     }
 
-    public function setPrice(int $price): self
+    public function setPrice(string $price): self
     {
         $this->price = $price;
 

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AboutController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello and welcome on Photo Rent!</h1>
+    <hr>
+    <hr>
+    <h2>Section Buy:</h2>
+    <br>
+    <p>In this Section, you can Buy our Product, Only BrandNew gears.</p>
+    <hr>
+    <hr>
+    <h2>To access to Rent or Sell Section, you must <a href="{{ path('app_register')}}">create</a> a account or <a href="{{ path('app_login')}}">loggIn</a>,</h2>
+    <h2>Thanks You!</h2>
+    <hr>
+    <h2>Section Rent:</h2>
+    
+    <p>In this Section, you can Rent our product.</p>
+    <p>Please check the avaibilty befor trying to rent!</p>
+    <p>You can send us an Email or Call Us!</p>
+    <hr>
+    <h2>Section Sell:</h2>
+    
+    <p>In this Section, you can Sell your Old/Use gears.</p>
+    <p>PhotoRent are NOT responsible of any transaction between you and the seller.</p>
+    <p>Please Be carefull!</p>
+    
+</div>
+{% endblock %}

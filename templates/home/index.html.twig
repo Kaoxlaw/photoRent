@@ -2,6 +2,18 @@
 
 {% block title %}Hello HomeController!{% endblock %}
 
+
 {% block body %}
-<h1>Welcome in Photo Rent!</h1>
+  <div class="example-wrapper">
+    <h1>Welcome in Photo Rent!</h1>
+    <hr>
+    <hr>
+    {% if(is_granted('IS_AUTHENTICATED_FULLY')) %}
+    Hello {{ app.user }} and Welcome!
+    {% else %}
+    <h2>To access to Rent or Sell Section, you must <a href="{{ path('app_register')}}">create</a> a account or <a href="{{ path('app_login')}}">loggIn</a>,</h2>
+    <h2>Thanks You!</h2>
+    {% endif %} 
+    <hr>
+  </div>
 {% endblock %}

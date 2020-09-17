@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SellEquipments index{% endblock %}
+
+{% block body %}
+    <div class = "example-wrapper">
+        <h1>SellEquipments</h1>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr class="trtitle">
+                    <th>Id</th>
+                    <th>Brand</th>
+                    <th>Type</th>
+                    <th>Model</th>
+                    <th>Number_id</th>
+                    <th>Available</th>
+                    <th>Date</th>
+                    <th>Price</th>
+                    <th>Pictures</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for sell_equipment in sell_equipments %}
+                <tr>
+                    <td>{{ sell_equipment.id }}</td>
+                    <td>{{ sell_equipment.brand }}</td>
+                    <td>{{ sell_equipment.type }}</td>
+                    <td>{{ sell_equipment.model }}</td>
+                    <td>{{ sell_equipment.numberId }}</td>
+                    <td>{{ sell_equipment.available ? 'Yes' : 'No' }}</td>
+                    <td>{{ sell_equipment.date ? sell_equipment.date|date('d-m-Y') : '' }}</td>
+                    <td>{{ sell_equipment.price }} €</td>
+                    <td><img src="{{ asset('uploads/sellEquipments/') }}{{ sell_equipment.pictures }}" width="250" height="150"></td>
+                    <td>
+                        <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">
+                            <a href="{{ path('sell_equipments_show', {'id': sell_equipment.id}) }}">show</a>
+                        </button>
+                        <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">    
+                            <a href="{{ path('sell_equipments_edit', {'id': sell_equipment.id}) }}">edit</a>
+                        </button>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="10">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <button class="btn btn-outline-info my-2 my-sm-0" type="submit">
+            <a href="{{ path('sell_equipments_new') }}">Create new</a>
+        </button>
+    </div>
+{% endblock %}

@@ -2,14 +2,14 @@
 
 namespace App\Form;
 
-use App\Entity\Equipments;
+use App\Entity\RentEquipments;
+use Doctrine\Common\Annotations\Annotation\Required;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
-
-class EquipmentsType extends AbstractType
+class RentEquipmentsType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -17,7 +17,8 @@ class EquipmentsType extends AbstractType
             ->add('brand')
             ->add('type')
             ->add('model')
-            ->add('numberId')
+            ->add('number_id')
+            ->add('availible')
             ->add('price')
             ->add('imageFile', VichImageType::class, ['required' => false]);
     }
@@ -25,7 +26,7 @@ class EquipmentsType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Equipments::class,
+            'data_class' => RentEquipments::class,
         ]);
     }
 }

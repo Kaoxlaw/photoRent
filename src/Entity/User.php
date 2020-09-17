@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -65,6 +67,16 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=20)
      */
     private $phoneNumber;
+
+    /**
+     * @ORM\OneToMany(targetEntity=SellEquipments::class, mappedBy="user")
+     */
+    private $sellEquipments;
+
+    public function __construct()
+    {
+        $this->brand = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -219,5 +231,36 @@ class User implements UserInterface
     public function __toString()
     {
         return $this->firstname . " " . $this->lastname;
+    }
+
+    /**
+     * @return Collection|SellEquipments[]
+     */
+    public function getSellEquipments(): Collection
+    {
+        return $this->sellEquipments;
+    }
+
+    public function addSellEquipments(SellEquipments $sellEquipments): self
+    {
+        if (!$this->sellEquipments->contains($sellEquipments)) {
+            $this->sellEquipments[] = $sellEquipments;
+            $sellEquipments->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSellEquipments(SellEquipments $sellEquipments): self
+    {
+        if ($this->sellEquipments->contains($sellEquipments)) {
+            $this->sellEquipments->removeElement($sellEquipments);
+            // set the owning side to null (unless already changed)
+            if ($sellEquipments->getUser() === $this) {
+                $sellEquipments->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }
