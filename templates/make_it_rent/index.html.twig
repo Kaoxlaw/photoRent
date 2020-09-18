@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MakeItRent index
+{% endblock %}
+
+{% block body %}
+
+	<div class="example-wrapper">
+
+		<h1>MakeItRent</h1>
+
+		<table class="table table-bordered table-striped">
+
+			<thead>
+				<tr class="trtitle">
+					<th>Id</th>
+					<th>StartDate</th>
+					<th>EndDate</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				{% for make_it_rent in make_it_rents %}
+					<tr>
+						<td>{{ make_it_rent.id }}</td>
+						<td>{{ make_it_rent.startDate ? make_it_rent.startDate|date('d-m-Y') : '' }}</td>
+						<td>{{ make_it_rent.endDate ? make_it_rent.endDate|date('d-m-Y') : '' }}</td>
+						<td>
+							<button class="btn btn-outline-info my-2 my-sm-0" type="submit">
+								<a href="{{ path('make_it_rent_show', {'id': make_it_rent.id}) }}">show</a>
+							</button>
+
+							<button class="btn btn-outline-info my-2 my-sm-0" type="submit">
+								<a href="{{ path('make_it_rent_edit', {'id': make_it_rent.id}) }}">edit</a>
+							</button>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="4">no records found</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<button class="btn btn-outline-info my-2 my-sm-0" type="submit">
+			<a href="{{ path('make_it_rent_new') }}">Create new</a>
+		</button>
+		<br><br>
+		<button class="btn btn-outline-info my-2 my-sm-0" type="submit">
+			<a href="{{ path('rent_equipments_index') }}">Back to Rent Equipments</a>
+		</button>
+	</div>
+{% endblock %}

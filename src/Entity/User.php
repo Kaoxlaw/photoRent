@@ -73,9 +73,15 @@ class User implements UserInterface
      */
     private $sellEquipments;
 
+    /**
+     * @ORM\OneToMany(targetEntity=MakeItRent::class, mappedBy="user")
+     */
+    private $makeItRents;
+
     public function __construct()
     {
         $this->brand = new ArrayCollection();
+        $this->makeItRents = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -258,6 +264,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($sellEquipments->getUser() === $this) {
                 $sellEquipments->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|MakeItRent[]
+     */
+    public function getMakeItRents(): Collection
+    {
+        return $this->makeItRents;
+    }
+
+    public function addMakeItRent(MakeItRent $makeItRent): self
+    {
+        if (!$this->makeItRents->contains($makeItRent)) {
+            $this->makeItRents[] = $makeItRent;
+            $makeItRent->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMakeItRent(MakeItRent $makeItRent): self
+    {
+        if ($this->makeItRents->contains($makeItRent)) {
+            $this->makeItRents->removeElement($makeItRent);
+            // set the owning side to null (unless already changed)
+            if ($makeItRent->getUser() === $this) {
+                $makeItRent->setUser(null);
             }
         }
 

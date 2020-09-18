@@ -1,54 +1,58 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}SellEquipments{% endblock %}
+{% block title %}SellEquipments
+{% endblock %}
 
 {% block body %}
-    <div class = "example-wrapper">
-        <h1>{{ sell_equipment.brand }} - {{ sell_equipment.model }}</h1>
+	<div class="example-wrapper">
+		<h1>{{ sell_equipment.brand }}
+			-
+			{{ sell_equipment.model }}</h1>
 
-        <table class="table">
-            <tbody>
-                <tr>
-                    <th>Brand</th>
-                    <td>{{ sell_equipment.brand }}</td>
-                </tr>
-                <tr>
-                    <th>Type</th>
-                    <td>{{ sell_equipment.type }}</td>
-                </tr>
-                <tr>
-                    <th>Model</th>
-                    <td>{{ sell_equipment.model }}</td>
-                </tr>
-                <tr>
-                    <th>Number_id</th>
-                    <td>{{ sell_equipment.numberId }}</td>
-                </tr>
-                <tr>
-                    <th>Available</th>
-                    <td>{{ sell_equipment.available ? 'Yes' : 'No' }}</td>
-                </tr>
-                <tr>
-                    <th>Date</th>
-                    <td>{{ sell_equipment.date ? sell_equipment.date|date('Y-m-d') : '' }}</td>
-                </tr>
-                <tr>
-                    <th>Price</th>
-                    <td>{{ sell_equipment.price }} €</td>
-                </tr>
-                <tr>
-                    <th>Pictures</th>
-                    <td><img src="{{ asset('uploads/sellEquipments/') }}{{ sell_equipment.pictures }}" width="250" height="150"></td>
-                </tr>
-            </tbody>
-        </table>
-        
-        <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">
-            <a href="{{ path('sell_equipments_index') }}">back to list</a>
-        </button>
-        <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">
-            <a href="{{ path('sell_equipments_edit', {'id': sell_equipment.id}) }}">edit</a>
-        </button>
-        {{ include('sell_equipments/_delete_form.html.twig') }}
-    </div>
+		<table class="table">
+			<tbody>
+				<tr>
+					<th>Brand</th>
+					<td>{{ sell_equipment.brand }}</td>
+				</tr>
+				<tr>
+					<th>Type</th>
+					<td>{{ sell_equipment.type }}</td>
+				</tr>
+				<tr>
+					<th>Model</th>
+					<td>{{ sell_equipment.model }}</td>
+				</tr>
+				<tr>
+					<th>Number_id</th>
+					<td>{{ sell_equipment.numberId }}</td>
+				</tr>
+				<tr>
+					<th>Available</th>
+					<td>{{ sell_equipment.available ? 'Yes' : 'No' }}</td>
+				</tr>
+				<tr>
+					<th>Date</th>
+					<td>{{ sell_equipment.date ? sell_equipment.date|date('Y-m-d') : '' }}</td>
+				</tr>
+				<tr>
+					<th>Price</th>
+					<td>{{ sell_equipment.price }}
+						€</td>
+				</tr>
+				<tr>
+					<th>Pictures</th>
+					<td><img src="{{ asset('uploads/sellEquipments/') }}{{ sell_equipment.pictures }}"></td>
+				</tr>
+			</tbody>
+		</table>
+
+		<button class="btn btn-outline-dark my-2 my-sm-0" type="submit">
+			<a href="{{ path('sell_equipments_index') }}">back to list</a>
+		</button>
+		<button class="btn btn-outline-dark my-2 my-sm-0" type="submit">
+			<a href="{{ path('sell_equipments_edit', {'id': sell_equipment.id}) }}">edit</a>
+		</button>
+		{{ include('sell_equipments/_delete_form.html.twig') }}
+	</div>
 {% endblock %}

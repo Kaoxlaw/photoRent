@@ -1,52 +1,56 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}RentEquipments{% endblock %}
+{% block title %}RentEquipments
+{% endblock %}
 
 {% block body %}
 
-    <div class = "example-wrapper">
-    <h1>{{ rent_equipment.brand }} - {{ rent_equipment.model }}</h1>
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Brand</th>
-                <td>{{ rent_equipment.brand }}</td>
-            </tr>
-            <tr>
-                <th>Type</th>
-                <td>{{ rent_equipment.type }}</td>
-            </tr>
-            <tr>
-                <th>Model</th>
-                <td>{{ rent_equipment.model }}</td>
-            </tr>
-            <tr>
-                <th>Number_id</th>
-                <td>{{ rent_equipment.numberId }}</td>
-            </tr>
-            <tr>
-                <th>Available</th>
-                <td>{{ rent_equipment.availible ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>Price</th>
-                <td>{{ rent_equipment.price }} €</td>
-            </tr>
-            <tr>
-                <th>Pictures</th>
-                <td><img src="{{ asset('uploads/rentEquipments/') }}{{ rent_equipment.pictures }}" width="250" height="150"></td>
-            </tr>
-        </tbody>
-    </table>
+	<div class="example-wrapper">
+		<h1>{{ rent_equipment.brand }}
+			-
+			{{ rent_equipment.model }}</h1>
+		<table class="table">
+			<tbody>
+				<tr>
+					<th>Brand</th>
+					<td>{{ rent_equipment.brand }}</td>
+				</tr>
+				<tr>
+					<th>Type</th>
+					<td>{{ rent_equipment.type }}</td>
+				</tr>
+				<tr>
+					<th>Model</th>
+					<td>{{ rent_equipment.model }}</td>
+				</tr>
+				<tr>
+					<th>Number_id</th>
+					<td>{{ rent_equipment.numberId }}</td>
+				</tr>
+				<tr>
+					<th>Available</th>
+					<td>{{ rent_equipment.availible ? 'Yes' : 'No' }}</td>
+				</tr>
+				<tr>
+					<th>Price</th>
+					<td>{{ rent_equipment.price }}
+						€</td>
+				</tr>
+				<tr>
+					<th>Pictures</th>
+					<td><img src="{{ asset('uploads/rentEquipments/') }}{{ rent_equipment.pictures }}"></td>
+				</tr>
+			</tbody>
+		</table>
 
-    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">
-        <a href="{{ path('rent_equipments_index') }}">back to list</a>
-    </button>
-    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">
-        <a href="{{ path('rent_equipments_edit', {'id': rent_equipment.id}) }}">edit</a>
-    </button>
+		<button class="btn btn-outline-dark my-2 my-sm-0" type="submit">
+			<a href="{{ path('rent_equipments_index') }}">back to list</a>
+		</button>
+		<button class="btn btn-outline-dark my-2 my-sm-0" type="submit">
+			<a href="{{ path('rent_equipments_edit', {'id': rent_equipment.id}) }}">edit</a>
+		</button>
 
-    {{ include('rent_equipments/_delete_form.html.twig') }}
-    </div>
+		{{ include('rent_equipments/_delete_form.html.twig') }}
+	</div>
 
 {% endblock %}

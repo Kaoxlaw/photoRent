@@ -1,17 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Equipments
+{% block title %}New MakeItRent
 {% endblock %}
 
 {% block body %}
 	<div class="example-wrapper">
-		<h1>Create new Equipments</h1>
-
-		{{ include('equipments/_form.html.twig') }}
+		<h1>Rent this article</h1>
+		<br>
+		{{ include('make_it_rent/_form.html.twig') }}
 		<br>
 		<button class="btn btn-outline-info my-2 my-sm-0" type="submit">
-			<a href="{{ path('equipments_index') }}">back to list</a>
+			<a href="{{ path('make_it_rent_index') }}">back to list</a>
 		</button>
-
 	</div>
 {% endblock %}

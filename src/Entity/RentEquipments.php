@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\RentEquipmentsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -61,6 +63,16 @@ class RentEquipments
      * @ORM\Column(type="string", length=50)
      */
     private $price;
+
+    /**
+     * @ORM\OneToMany(targetEntity=MakeItRent::class, mappedBy="rentEquipments")
+     */
+    private $makeItRents;
+
+    public function __construct()
+    {
+        $this->makeItRents = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -157,6 +169,37 @@ class RentEquipments
     public function setPrice(string $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|MakeItRent[]
+     */
+    public function getMakeItRents(): Collection
+    {
+        return $this->makeItRents;
+    }
+
+    public function addMakeItRent(MakeItRent $makeItRent): self
+    {
+        if (!$this->makeItRents->contains($makeItRent)) {
+            $this->makeItRents[] = $makeItRent;
+            $makeItRent->setRentEquipments($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMakeItRent(MakeItRent $makeItRent): self
+    {
+        if ($this->makeItRents->contains($makeItRent)) {
+            $this->makeItRents->removeElement($makeItRent);
+            // set the owning side to null (unless already changed)
+            if ($makeItRent->getRentEquipments() === $this) {
+                $makeItRent->setRentEquipments(null);
+            }
+        }
 
         return $this;
     }
